@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery 3D Bar Graph Demo</title>
+	<style type="text/css">
+	    #formcontainer { float: left; }
+		#grapharea { position: relative; float: left; margin-left: 4em; }
+		#graphcontainer { position: relative; width: 262px; height: 430px; overflow: hidden; }
+		#graphbackground, #graphforeground { position: absolute; }
+		#graphbar { position: absolute; top: 430px; }
+		
+		.graphlabel { position: absolute; left: 270px; }
+		#p25 { top: 365px; }
+		#p50 { top: 278px; }
+		#p75 { top: 191px; }
+		#p100 { top: 105px; }
+	</style>
+	
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	
+	<script type="text/JavaScript">
+	    function calculate()
+	    {
+	        var ZEROPOS = 355;
+	        var salary = $("#income").val();
+	        var savings = $("#savings").val();
+	        var percent = savings / salary;
+
+	        if (parseInt(savings) >  0 && parseInt(salary) > 0)
+	        {
+	            if (parseInt(savings) > parseInt(salary))
+	                alert("You cannot save more than you earn - please change your selections accordingly.");
+	            else
+	            {
+	                val = (percent == 0) ? ZEROPOS : ZEROPOS - (percent * ZEROPOS);
+	                $("#graphbar").animate({ top: val + "px" }, 1500);
+	            }
+            }
+	    }
+	</script>
+</head>
+<body>
+    <noscript>
+        <h3>You must enable JavaScript to view this demo!</h3>
+    </noscript>
+    <form action="#" id="form1" onsubmit="return false;">
+
+        <!-- container for the form elements -->
+        <div id="formcontainer">
+            <p>
+	            How much money do you want to contribute to savings each month?<br />
+                <select id="savings" onchange="calculate();">
+                    <option selected="selected" value="0">- select an amount -</option>
+                    <option value="100">100 dollars</option>
+                    <option value="200">200 dollars</option>
+                    <option value="300">300 dollars</option>
+                    <option value="400">400 dollars</option>
+                    <option value="500">500 dollars</option>
+                    <option value="1000">1000 dollars</option>
+                    <option value="2000">2000 dollars</option>
+                    <option value="3000">3000 dollars</option>
+                    <option value="4000">4000 dollars</option>
+                    <option value="5000">5000 dollars</option>
+                </select>
+            </p>
+            <p>
+	            What is your monthly income?<br />
+                <select id="income" onchange="calculate();">
+                    <option selected="selected" value="0">- select an amount -</option>
+                    <option value="1000">1000 dollars</option>
+                    <option value="2000">2000 dollars</option>
+                    <option value="3000">3000 dollars</option>
+                    <option value="4000">4000 dollars</option>
+                    <option value="5000">5000 dollars</option>
+                </select>
+            </p>
+            <p>
+                <br /><a href="http://blog.truematter.com">Read Blog Article &#0187;</a>
+            </p>
+        </div>
+
+        <!-- container for the graph elements -->
+        <div id="grapharea">
+	        <h4>Percentage of Monthly Salary Saved</h4>
+            <div id="p25" class="graphlabel">25%</div>
+            <div id="p50" class="graphlabel">50%</div>
+            <div id="p75" class="graphlabel">75%</div>
+            <div id="p100" class="graphlabel">100%</div>
+
+	        <div id="graphcontainer">
+		        <img src="images/graphbackground.png" id="graphbackground" width="262" height="430" alt="" />
+		        <img src="images/graphbar.png" id="graphbar" width="262" height="430" alt="" />
+		        <img src="images/graphforeground.png" id="graphforeground" width="262" height="430" alt="" />
+	        </div>
+        </div>
+
+    </form>
+</body>
+</html>
